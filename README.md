@@ -1,5 +1,13 @@
 # Mortgage Calculator
 
+Current Features
+
+- [x] Payment and Prepayment forms
+- [x] Mortgage Payment
+- [x] Basic tests
+- [ ] Add type annotations
+- [ ] Add functional tests
+
 ## Available Scripts
 
 In the project directory, you can run:

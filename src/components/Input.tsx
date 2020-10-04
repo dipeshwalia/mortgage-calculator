@@ -19,19 +19,23 @@ const InputLabel = styled.div`
   margin-bottom: 10px;
 `;
 
-export default function InputComponent({ onChange, label }: any) {
+export default function InputComponent({ onChange, label, initialState = 1 }: any) {
+  const [value, setValue] = React.useState(initialState);
   return (
     <InputWrapper>
       <InputLabel>{label}:</InputLabel>
       <Input
-        value={12}
+        data-testid="input"
+        value={value}
         type="number"
-        aria-label="min"
+        aria-label={label}
         onChange={(e) => {
-          const val = e.target.value;
-          console.log(val);
+          const val = Number(e.target.value);
+          if(val === 0) return alert("Please use value greater than 0")
+          setValue(val);
+          onChange(val);
         }}
-        placeholder={`Min `}
+        placeholder={label}
       />
     </InputWrapper>
   );

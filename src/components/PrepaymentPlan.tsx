@@ -23,13 +23,38 @@ const Title = styled.div`
   color: white;
 `;
 
-export default function Prepayment() {
+export default function Prepayment({prepaymentChange, initialState}: any) {
+  const [state, setState] = React.useState(initialState);
+
+  React.useEffect(()=> {
+    prepaymentChange(state)
+   //eslint-disable-next-line
+  }, [state])
   return (
-    <InputWrapper>
+    <InputWrapper data-testid="prepayment">
       <Title>Prepayment Plan</Title>
-      <Input label={"Prepayment Amount"} />
-      <Dropdown label={"Prepayment Frequency"} />
-      <Input label={"Start With Payment"} />
+      <Input
+        label={"Prepayment Amount"}
+        onChange={(v: any) =>
+          setState((prev: any) => {
+            return { ...prev, prepayment: v };
+          })
+        }
+      />
+      <Dropdown
+        label={"Prepayment Frequency"}
+        onChange={(v: any) => {
+          setState((prev: any) => {
+            return {
+              ...prev,
+              prepaymentFrequency: v,
+            };
+          });
+        }}
+        data={[
+          { value: 1, label: "One Time" },
+        ]}
+      />
     </InputWrapper>
   );
 }
